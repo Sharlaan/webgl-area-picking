@@ -1,0 +1,53 @@
+:root {
+  --body-padding: 20px;
+}
+
+html,
+body {
+  font-family: 'Open Sans';
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* padding: var(--body-padding); */
+}
+
+#model-container {
+  position: relative;
+  padding: 40px;
+}
+
+.commands {
+  position: absolute;
+  color: white;
+  padding: 20px;
+}
+
+.control-points-list {
+  position: absolute;
+  right: 0; /* calc(var(--body-padding) * -1); */
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 10px;
+}
+
+.control-points-list h3 {
+  margin: 0;
+}
+
+.list {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.list li {
+  border: 1px solid transparent;
+  padding: 2px 5px;
+}
+
+.list li:hover {
+  cursor: pointer;
+  border: 1px solid white;
+}

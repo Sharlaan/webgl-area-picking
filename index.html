@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Three.js - Webgl - Interactions</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+
+  <body>
+    <section id="model-container">
+      <aside class="commands">
+        Commands :<br />
+        Use mouse left to rotate the scene, mouse right to move it.<br />
+        On the model, use <b>CTRL + mouse left</b> to affect/deselect a face to a new Control
+        Point.<br />
+        Hold the mouse button and drag to select more faces.
+      </aside>
+
+      <aside class="control-points-list">
+        <h3>Control Points</h3>
+        <ul class="list"></ul>
+      </aside>
+    </section>
+
+    <script>
+      // Checks for WebGL v1.0 in Browser / Graphic Card
+      // source: https://threejs.org/examples/js/WebGL.js
+      function isWebGLAvailable() {
+        try {
+          const canvas = document.createElement('canvas');
+          return !!(
+            window.WebGLRenderingContext &&
+            (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+          );
+        } catch (error) {
+          return false;
+        }
+      }
+
+      function getWebGLErrorMessage() {
+        const version = 1;
+
+        const names = {
+          1: 'WebGL',
+          2: 'WebGL 2',
+        };
+
+        const contexts = {
+          1: window.WebGLRenderingContext,
+          2: window.WebGL2RenderingContext,
+        };
+
+        const platform = contexts[version] ? 'graphics card' : 'browser';
+
+        const message = `Your ${platform} does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">${
+          names[version]
+        }</a>`;
+
+        const element = document.createElement('div');
+        element.id = 'webglmessage';
+        element.style.fontFamily = 'monospace';
+        element.style.fontSize = '13px';
+        element.style.fontWeight = 'normal';
+        element.style.textAlign = 'center';
+        element.style.background = '#fff';
+        element.style.color = '#000';
+        element.style.padding = '1.5em';
+        element.style.width = '400px';
+        element.style.margin = '5em auto 0';
+
+        element.innerHTML = message;
+
+        return element;
+      }
+    </script>
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://threejs.org/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://threejs.org/examples/js/loaders/STLLoader.js"></script>
+    <script src="./Scene.js"></script>
+    <script src="./BusinessLogic.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
