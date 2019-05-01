@@ -70,3 +70,12 @@ body {
   cursor: pointer;
   border: 1px solid white;
 }
+
+#fullscreen {
+  position: absolute;
+  bottom: 0;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: url('./fullscreen.png') center no-repeat;
+}
