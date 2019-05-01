@@ -36,11 +36,11 @@ class Scene {
     }
 
     // Ground
-    const planeGeometry = new THREE.PlaneBufferGeometry(40, 40);
+    const planeGeometry = new THREE.PlaneBufferGeometry(20, 20);
     const planeMaterial = new THREE.MeshPhongMaterial({ color: 0x999999, specular: 0x101010 });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.position.y = -0.5;
     plane.rotation.x = -Math.PI / 2;
+    plane.position.y = -0.5;
     plane.receiveShadow = true;
     plane.name = 'Ground';
     this.scene.add(plane);
@@ -55,13 +55,16 @@ class Scene {
     this.scene.add(lightHemisphere, light1 /*, light2 */);
 
     // Camera
-    this.camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 15);
+    const fieldOfView = 35;
+    const aspectRatio = window.innerWidth / window.innerHeight;
+    this.camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, 1, 15);
     this.camera.position.fromArray(config.cameraPosition);
 
     // Renderer
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    // renderer.setSize sets the canva's width/height
+    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
     this.renderer.gammaInput = true;
     this.renderer.gammaOutput = true;
     this.renderer.shadowMap.enabled = true;
@@ -100,6 +103,8 @@ class Scene {
 
   onWindowResize() {
     if (this.camera) {
+      // this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
       this.camera.aspect = window.innerWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(window.innerWidth, window.innerHeight);
