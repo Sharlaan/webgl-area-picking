@@ -35,6 +35,17 @@ class Scene {
       this.scene.add(axesHelper);
     }
 
+    // Grid of size 'size' and divided into 'divisions' segments per side.
+    if (this.config.withGrid) {
+      const size = 2;
+      const divisions = 10;
+      const mainColor = 'yellow';
+      const gridColor = 'darkGrey';
+      const gridHelper = new THREE.GridHelper(size, divisions, mainColor, gridColor);
+      gridHelper.name = 'Grid Helper';
+      this.scene.add(gridHelper);
+    }
+
     // Ground
     const planeGeometry = new THREE.PlaneBufferGeometry(20, 20);
     const planeMaterial = new THREE.MeshPhongMaterial({ color: 0x999999, specular: 0x101010 });

@@ -24,6 +24,7 @@ const props = {
     SELECTION_COLOR: 'blue',
     iconPath: 'target.png',
     withAxis: true,
+    withGrid: true,
   },
   // showPointerAndEdgesHandler: controlProcess.showPointerAndEdges,
   // faceSelectorHandler: controlProcess.toggleSelections,
