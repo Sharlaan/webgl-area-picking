@@ -86,7 +86,8 @@ class Scene {
     // this.container.appendChild(this.stats.dom);
 
     // Mouse controls
-    this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+    this.controls = new THREE.OrbitControls(this.camera);
+    this.controls.maxPolarAngle = Math.PI / 2; // prevents camera to go underground
 
     // DOM events listeners
     window.addEventListener('resize', this.onWindowResize, false);
