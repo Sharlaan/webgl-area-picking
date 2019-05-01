@@ -35,6 +35,34 @@ class BusinessLogic {
     }
   };
 
+  initModelAndCameraEventListeners = () => {
+    const Model = this.modelsInstance.scene.getObjectByName('Model');
+    const Camera = this.modelsInstance.camera;
+    const modelPositionsButtons = this.modelsInstance.container.querySelectorAll(
+      '.model-positions button',
+    );
+    const povButtons = this.modelsInstance.container.querySelectorAll('.view-commands button');
+    const handlersMapping = {
+      reset: () => Camera.position.fromArray(this.modelsInstance.config.cameraPosition),
+      opposite: () => Camera.position.set(2, 2, -3),
+      face: () => Model.lookAt(0, 0, 1),
+      behind: () => Model.lookAt(0, 0, -1),
+      left: () => Model.lookAt(-1, 0, 0),
+      right: () => Model.lookAt(1, 0, 0),
+      above: () => Model.lookAt(0, 1, 0),
+      below: () => Model.lookAt(0, -1, 0),
+    };
+    modelPositionsButtons.forEach((button) =>
+      button.addEventListener('click', handlersMapping[button.name]),
+    );
+    povButtons.forEach((button) => button.addEventListener('click', handlersMapping[button.name]));
+
+    const fullscreenButton = document.getElementById('fullscreen');
+    fullscreenButton.addEventListener('click', () =>
+      this.modelsInstance.container.requestFullscreen(),
+    );
+  };
+
   onMouseMove = (event) => {
     event.preventDefault();
     const faceEdge = this.modelsInstance.scene.getObjectByName('Face Edge');

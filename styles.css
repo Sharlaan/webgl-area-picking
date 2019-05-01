@@ -20,10 +20,28 @@ body {
   height: calc(100vh - var(--body-padding) * 2);
 }
 
-.commands {
+.explanations {
   position: absolute;
   color: white;
   padding: 20px;
+}
+
+.povs {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.view-commands,
+.model-positions {
+  display: flex;
+  flex-direction: column;
+}
+
+.view-commands button:hover,
+.model-positions button:hover {
+  cursor: pointer;
+  color: blue;
 }
 
 .control-points-list {

@@ -1,4 +1,5 @@
 // interesting sources
+// Main ThreeJS documentation: https://threejs.org/docs
 // wireframe: https://threejs.org/examples/#webgl_geometry_convex
 // wireframe: https://threejs.org/examples/#webgl_lines_fat_wireframe
 // https://threejs.org/examples/?q=raycast#webgl_raycast_texture
@@ -19,7 +20,7 @@ const props = {
   where: '#model-container',
   modelUrl: model2,
   config: {
-    cameraPosition: [-2, 1.8, 3.25],
+    cameraPosition: [-2, 2, 3],
     BASE_COLOR: 0xff5533,
     SELECTION_COLOR: 'blue',
     iconPath: 'target.png',
@@ -42,5 +43,6 @@ if (isWebGLAvailable()) {
   sceneInstance
     .renderModel()
     .then(controller.initSelectedFaces)
+    .then(controller.initModelAndCameraEventListeners)
     .then(sceneInstance.animatedRender);
 } else document.body.appendChild(getWebGLErrorMessage());

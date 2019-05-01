@@ -119,7 +119,6 @@ class Scene {
       this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
       this.camera.aspect = window.innerWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
   }
 

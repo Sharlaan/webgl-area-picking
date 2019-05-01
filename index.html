@@ -12,7 +12,7 @@
 
   <body>
     <section id="model-container">
-      <aside class="commands">
+      <aside class="explanations">
         Commands :<br />
         Use mouse left to rotate the scene, mouse right to move it.<br />
         On the model, use <b>CTRL + mouse left</b> to affect/deselect a face to a new Control
@@ -24,6 +24,25 @@
         <h3>Control Points</h3>
         <ul class="list"></ul>
       </aside>
+
+      <div class="povs">
+        <aside class="view-commands">
+          <h3>Points of View</h3>
+          <button name="reset">Reset to perspective view</button>
+          <button name="opposite">Opposite perspective</button>
+        </aside>
+
+        <aside class="model-positions">
+          <h3>Model Positions</h3>
+          <button name="face">Face</button>
+          <button name="behind">Behind</button>
+          <button name="left">Left</button>
+          <button name="right">Right</button>
+          <button name="above">Above</button>
+          <button name="below">Below</button>
+        </aside>
+      </div>
+
     </section>
 
     <script>
