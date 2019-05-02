@@ -1,5 +1,7 @@
 // interesting sources
 // Main ThreeJS documentation: https://threejs.org/docs
+// Mouse controls with dragging and axes: https://threejs.org/examples/misc_controls_transform.html
+// Fluid orientation changes: https://threejs.org/examples/#webgl_math_orientation_transform
 // wireframe: https://threejs.org/examples/#webgl_geometry_convex
 // wireframe: https://threejs.org/examples/#webgl_lines_fat_wireframe
 // https://threejs.org/examples/?q=raycast#webgl_raycast_texture
@@ -21,6 +23,7 @@ const props = {
   modelUrl: model2,
   config: {
     cameraPosition: [-2, 2, 3],
+    rotationSpeed: 0.075, // rotation speed for PoV changes
     BASE_COLOR: 0xff5533,
     SELECTION_COLOR: 'blue',
     iconPath: 'target.png',
@@ -44,5 +47,5 @@ if (isWebGLAvailable()) {
     .renderModel()
     .then(controller.initSelectedFaces)
     .then(controller.initModelAndCameraEventListeners)
-    .then(sceneInstance.animatedRender);
+    .then(sceneInstance.animatedRender); // Must always be in the last call
 } else document.body.appendChild(getWebGLErrorMessage());

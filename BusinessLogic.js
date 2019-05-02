@@ -45,12 +45,12 @@ class BusinessLogic {
     const handlersMapping = {
       reset: () => Camera.position.fromArray(this.modelsInstance.config.cameraPosition),
       opposite: () => Camera.position.set(2, 2, -3),
-      face: () => Model.lookAt(0, 0, 1),
-      behind: () => Model.lookAt(0, 0, -1),
-      left: () => Model.lookAt(-1, 0, 0),
-      right: () => Model.lookAt(1, 0, 0),
-      above: () => Model.lookAt(0, 1, 0),
-      below: () => Model.lookAt(0, -1, 0),
+      face: () => this.modelsInstance.rotateModel(0, 0, 1),
+      behind: () => this.modelsInstance.rotateModel(0, 0, -1),
+      left: () => this.modelsInstance.rotateModel(1, 0, 0),
+      right: () => this.modelsInstance.rotateModel(-1, 0, 0),
+      above: () => this.modelsInstance.rotateModel(0, -1, 0),
+      below: () => this.modelsInstance.rotateModel(0, 1, 0),
     };
     modelPositionsButtons.forEach((button) =>
       button.addEventListener('click', handlersMapping[button.name]),

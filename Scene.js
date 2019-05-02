@@ -8,6 +8,12 @@
  */
 class Scene {
   constructor({ where, modelUrl, config }) {
+    this.state = {
+      targetPosition: new THREE.Vector3(),
+      rotationMatrix: new THREE.Matrix4(),
+      targetRotation: new THREE.Quaternion(),
+    };
+
     this.container = document.querySelector(where);
     this.modelUrl = modelUrl;
     this.config = config;
@@ -86,7 +92,7 @@ class Scene {
     // this.container.appendChild(this.stats.dom);
 
     // Mouse controls
-    this.controls = new THREE.OrbitControls(this.camera);
+    this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
     this.controls.maxPolarAngle = Math.PI / 2; // prevents camera to go underground
 
     // DOM events listeners
@@ -191,14 +197,6 @@ class Scene {
     return directionalLight;
   }
 
-  animatedRender = () => {
-    requestAnimationFrame(this.animatedRender);
-    this.controls.update();
-    // this.stats.update(); // shows a FPS-meter
-    // this.camera.lookAt(this.scene.position); // locks the camera on the model (means the model can only be rotated, not moved)
-    this.renderer.render(this.scene, this.camera);
-  };
-
   async renderModel() {
     try {
       const modelGeometry = await this.loadModel(this.modelUrl);
@@ -229,4 +227,28 @@ class Scene {
       throw new Error(`Loading the inputted STL file failed ! ${error}`);
     }
   }
+
+  // x, y, z: coords of point to rotate towards
+  rotateModel(x, y, z) {
+    const Model = this.scene.getObjectByName('Model');
+    this.state.targetPosition = new THREE.Vector3(x, y, z);
+    this.state.rotationMatrix.lookAt(this.state.targetPosition, Model.position, Model.up);
+    this.state.targetRotation.setFromRotationMatrix(this.state.rotationMatrix);
+    this.animateRotation();
+  }
+
+  animateRotation = () => {
+    const Model = this.scene.getObjectByName('Model');
+    const SPEED = this.config.rotationSpeed;
+    const step = SPEED; // TODO: replace this method with an easing function
+    Model.quaternion.rotateTowards(this.state.targetRotation, step);
+    !Model.quaternion.equals(this.state.targetRotation) &&
+      requestAnimationFrame(this.animateRotation);
+  };
+
+  animatedRender = () => {
+    requestAnimationFrame(this.animatedRender);
+    // this.stats.update(); // shows a FPS-meter
+    this.renderer.render(this.scene, this.camera);
+  };
 }
