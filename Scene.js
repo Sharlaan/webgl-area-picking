@@ -119,14 +119,11 @@ class Scene {
     });
   }
 
-  onWindowResize() {
-    if (this.camera) {
-      // this.renderer.setSize(window.innerWidth, window.innerHeight);
-      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-      this.camera.aspect = window.innerWidth / window.innerHeight;
-      this.camera.updateProjectionMatrix();
-    }
-  }
+  onWindowResize = (event) => {
+    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+  };
 
   // x, y : mouse positions in global window
   getIntersection = ({ clientX, clientY, offsetX, offsetY, target }) => {
