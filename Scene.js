@@ -119,7 +119,7 @@ class Scene {
     });
   }
 
-  onWindowResize = (event) => {
+  onWindowResize = () => {
     this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();

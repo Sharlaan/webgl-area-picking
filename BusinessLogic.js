@@ -59,7 +59,9 @@ class BusinessLogic {
 
     const fullscreenButton = document.getElementById('fullscreen');
     fullscreenButton.addEventListener('click', () =>
-      this.modelsInstance.container.requestFullscreen(),
+      document.fullscreenElement
+        ? document.exitFullscreen()
+        : this.modelsInstance.container.requestFullscreen(),
     );
   };
 
